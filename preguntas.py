@@ -174,10 +174,10 @@ def pregunta_10(df):
         aux = [str(i) for i in aux]
         return ':'.join(aux)
 
-    ans = tbl0.groupby('_c1').apply(format_10).to_frame().reset_index()
+    ans = tbl0.groupby('_c1').apply(format).to_frame().reset_index()
     ans.rename(columns={0: '_c2'}, inplace=True)
-    return ans
-
+    ans.set_index('_c1', inplace=True)
+    ans
 
 def pregunta_11():
     """
