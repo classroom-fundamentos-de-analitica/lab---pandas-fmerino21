@@ -169,13 +169,13 @@ def pregunta_10(df):
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    def format(df):
+    def format_10(df):
         aux = sorted([i for i in df['_c2']])
         aux = [str(i) for i in aux]
         return ':'.join(aux)
 
-    ans = tbl0.groupby('_c1').apply(format).to_frame().reset_index()
-    ans.rename(columns={0: '_c0'}, inplace=True)
+    ans = tbl0.groupby('_c1').apply(format_10).to_frame().reset_index()
+    ans.rename(columns={0: '_c2'}, inplace=True)
     return ans
 
 
