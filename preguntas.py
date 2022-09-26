@@ -174,7 +174,9 @@ def pregunta_10(df):
         aux = [str(i) for i in aux]
         return ':'.join(aux)
 
-    return tbl0.groupby('_c1').apply(format)
+    ans = tbl0.groupby('_c1').apply(format).to_frame().reset_index()
+    ans.rename(columns={0: '_c0'}, inplace=True)
+    return ans
 
 
 def pregunta_11():
@@ -193,7 +195,15 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    def format(df):
+        #return [f"{i}:" for i in df['_c2']]
+        aux = sorted([i for i in df['_c4']])
+        aux = [str(i) for i in aux]
+        return ','.join(aux)
+
+    ans = tbl1.groupby('_c0').apply(format).reset_index()
+    ans.rename(columns={0: '_c4'}, inplace = True)
+    return ans
 
 
 def pregunta_12():
@@ -211,7 +221,20 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    def format(df):
+        aux_1 = [str(i) for i in df['_c5a']]
+        aux_2 = [str(i) for i in df['_c5b']]
+        aux = sorted(list(zip(aux_1, aux_2)))
+        ans = []
+        for i in aux:
+            s = i[0] + ":" + str(i[1])
+            ans.append(s)
+
+        return ",".join(ans)
+
+    ans = tbl2.groupby('_c0').apply(format).reset_index()
+    ans.rename(columns={0: '_c5'}, inplace=True)
+    return ans
 
 
 def pregunta_13():
